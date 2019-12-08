@@ -1,26 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Todos from './Todos';
+import Login from './Login';
+import Todo from './Todo';
+import Header from './components/Header';
+import data from './users.json';
+
+class App extends React.Component {
+  componentDidMount() {
+    if (!localStorage.getItem('users')) {
+      localStorage.setItem('users', JSON.stringify(data));
+    }
+  }
+
+  render() {
+    return (
+      <BrowserRouter>
+        <Header></Header>
+        <Switch>
+          <Route path='/todos/:email'>
+            <Todos></Todos>
+          </Route>
+          <Route path='/edit/:id'>
+            <Todo></Todo>
+          </Route>
+          <Route path='/'>
+            <Login></Login>
+          </Route>
+          <Route path='*'>
+            <h1>404 not found</h1>
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;
