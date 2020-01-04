@@ -63,9 +63,9 @@ class Todo extends React.Component {
         }}
       >
         <h1>Edit Todo</h1>
-        <div class='input-group mb-3'>
-          <div class='input-group-prepend'>
-            <div class='input-group-text'>
+        <div className='input-group mb-3'>
+          <div className='input-group-prepend'>
+            <div className='input-group-text'>
               <input
                 type='checkbox'
                 checked={this.state.checked}
